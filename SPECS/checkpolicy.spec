@@ -1,17 +1,19 @@
-%define libselinuxver 3.5-1
-%define libsepolver 3.5-1
+%define libselinuxver 3.6-1
+%define libsepolver 3.6-1
 
 Summary: SELinux policy compiler
 Name: checkpolicy
-Version: 3.5
+Version: 3.6
 Release: 1%{?dist}
 License: GPLv2
-Source0: https://github.com/SELinuxProject/selinux/releases/download/3.5/checkpolicy-3.5.tar.gz
+Source0: https://github.com/SELinuxProject/selinux/releases/download/3.6/checkpolicy-3.6.tar.gz
 # $ git clone https://github.com/fedora-selinux/selinux.git
 # $ cd selinux
-# $ git format-patch -N 3.5 -- checkpolicy
+# $ git format-patch -N 3.6 -- checkpolicy
 # $ i=1; for j in 00*patch; do printf "Patch%04d: %s\n" $i $j; i=$((i+1));done
 # Patch list start
+Patch0001: 0001-Revert-Do-not-automatically-install-Russian-translat.patch
+Patch0002: 0002-Revert-checkpolicy-Remove-the-Russian-translations.patch
 # Patch list end
 BuildRequires: gcc
 BuildRequires: make
@@ -61,6 +63,12 @@ install test/dispol ${RPM_BUILD_ROOT}%{_bindir}/sedispol
 %{_bindir}/sedispol
 
 %changelog
+* Thu Dec 14 2023 Petr Lautrbach <lautrbach@redhat.com> - 3.6-1
+- SELinux userspace 3.6 release
+
+* Mon Nov 13 2023 Petr Lautrbach <lautrbach@redhat.com> - 3.6-0.rc1.1
+- SELinux userspace 3.6-rc1 release
+
 * Thu Feb 23 2023 Petr Lautrbach <lautrbach@redhat.com> - 3.5-1
 - SELinux userspace 3.5 release
 
